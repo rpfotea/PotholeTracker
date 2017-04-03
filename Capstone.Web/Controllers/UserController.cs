@@ -8,7 +8,7 @@ using Capstone.Web.Models;
 
 namespace Capstone.Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : PotholeController
     {
         private IUserDAL userDAL;
 
@@ -19,7 +19,37 @@ namespace Capstone.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Home", "Index");
         }
+
+        [HttpGet]
+        [Route("user/register")]
+        public ActionResult Register()
+        {
+            if (base.IsAuthenticated)
+            {
+                return RedirectToAction("Home", "Index", new { username = base.CurrentUser });
+            }
+            else
+            {
+                var model = new RegisterModel();
+                return View("Register", model);
+            }
+        }
+
+        [HttpPost]
+        [Route("user/register")]
+        public ActionResult Register(RegisterModel newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Register", newUser);
+            }
+
+            userDAL.RegisterUser(newUser);
+
+            return RedirectToAction("Home", "Index");
+        }
+
     }
 }
