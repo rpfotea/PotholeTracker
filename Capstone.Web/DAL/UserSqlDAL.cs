@@ -7,13 +7,19 @@ using Capstone.Web.Models;
 
 namespace Capstone.Web.DAL
 {
-    public class UserSqlDAL
+    public class UserSqlDAL : IUserDAL
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["potholeDB"].ConnectionString;
 
-        public void RegisterUser(RegisterModel newUser)
+        public bool RegisterUser(RegisterModel newUser)
         {
+            
 
+
+
+
+
+            return false;
         }
     }
 }
