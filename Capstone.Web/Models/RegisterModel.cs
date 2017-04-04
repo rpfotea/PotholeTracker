@@ -15,7 +15,7 @@ namespace Capstone.Web.Models
 
         [Display(Name = "Password: ")]
         [Required(ErrorMessage = "This field is required")]
-        [RegularExpression("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$", ErrorMessage = "Passwords must have at least 8 characters, one uppercase, one lowercase, one number, and one special character")]
+        [RegularExpression("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$", ErrorMessage = "Passwords must have at least 8 characters, one uppercase, one lowercase, one number, and one special character")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm Password: ")]
