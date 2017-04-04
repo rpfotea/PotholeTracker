@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace Capstone.Web.Models
 {
@@ -30,5 +31,18 @@ namespace Capstone.Web.Models
         public string UserType { get; set; }
 
         public string Salt { get; set; }
+
+        public static KeyValuePair<string, string> HashPassword(string password, int saltSize, int workFactor)
+        {
+            Rfc2898DeriveBytes cryptoProvider = new Rfc2898DeriveBytes(password, 8, 100000);
+
+            byte[] hash = cryptoProvider.GetBytes(20);
+            byte[] salt = cryptoProvider.Salt;
+
+            KeyValuePair<string, string> saltAndHash = new KeyValuePair<string, string> ( Convert.ToBase64String(salt), Convert.ToBase64String(hash) );
+
+            return saltAndHash;
+        }
+
     }
 }

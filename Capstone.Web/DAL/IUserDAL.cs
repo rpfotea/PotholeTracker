@@ -11,6 +11,8 @@ namespace Capstone.Web.DAL
     {
 
         bool RegisterUser(RegisterModel newUser);
-
+        bool VerifyUniqueEmail(string email);
+        int LogInUser(LoginModel user);
+        User GetUser(int userId);
     }
 }

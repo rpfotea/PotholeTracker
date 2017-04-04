@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone.Web.Models;
+using Capstone.Web.DAL;
 
 namespace Capstone.Web.Controllers
 {
@@ -10,40 +12,46 @@ namespace Capstone.Web.Controllers
     {
         private const string UsernameKey = "Pothole_UserName";
 
-        // GET: Pothole
-        public ActionResult Index()
+        private IUserDAL userDAL;
+
+        public PotholeController(IUserDAL userDAL)
         {
-            return View();
+            this.userDAL = userDAL;
         }
 
         public bool IsAuthenticated
         {
             get
             {
-                return Session[UsernameKey] != null;
+                return Session["userId"] != null;
             }
         }
 
-
-        /// <summary>
-        /// Gets the value from the Session
-        /// </summary>
-        public string CurrentUser
+        public User CurrentUser
         {
             get
             {
-                string username = string.Empty;
-
-                //Check to see if user cookie exists, if not create it
-                if (Session[UsernameKey] != null)
+                if (IsAuthenticated)
                 {
-                    username = (string)Session[UsernameKey];
+                    return userDAL.GetUser(Convert.ToInt32(Session["userId"]));
                 }
 
-                return username;
+                return null;
             }
         }
 
+        public ActionResult Index()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetNavbar()
+        {
+            User model = CurrentUser;
+
+            return PartialView("_Navbar", model);
+        }
 
     }
 }

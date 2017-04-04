@@ -18,9 +18,9 @@ namespace Capstone.Web.Filter
             {
 
                 //gets the username from the url
-                var impliedUsername = (string)filterContext.ActionParameters["username"];
+                var impliedUserId = (int)filterContext.ActionParameters["userId"];
                 var controller = (PotholeController)filterContext.Controller;
-                var actualUsername = controller.CurrentUser;
+                var actualUserId = controller.CurrentUser.UserId;
 
                 // If the user is not logged in, then take them to the login page
                 if (!controller.IsAuthenticated)
@@ -36,7 +36,7 @@ namespace Capstone.Web.Filter
                 }
                 else
                 {
-                    if (impliedUsername.ToLower() != actualUsername.ToLower()) //They're liars
+                    if (impliedUserId != actualUserId) //They're liars
                     {
                         filterContext.Result = new HttpStatusCodeResult(403);
                     }
