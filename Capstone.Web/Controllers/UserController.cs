@@ -53,7 +53,7 @@ namespace Capstone.Web.Controllers
 
             userDAL.RegisterUser(newUser);
 
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index","Home");
         }
 
         [HttpGet]
