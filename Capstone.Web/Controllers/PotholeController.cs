@@ -12,31 +12,24 @@ namespace Capstone.Web.Controllers
     {
         private const string UsernameKey = "Pothole_UserName";
 
-        private IUserDAL userDAL;
-
-        public PotholeController(IUserDAL userDAL)
-        {
-            this.userDAL = userDAL;
-        }
-
-        public bool IsAuthenticated
-        {
-            get
-            {
-                return Session["userId"] != null;
-            }
-        }
-
         public User CurrentUser
         {
             get
             {
                 if (IsAuthenticated)
                 {
-                    return userDAL.GetUser(Convert.ToInt32(Session["userId"]));
+                    return (User)Session["user"];
                 }
 
                 return null;
+            }
+        }
+
+        public bool IsAuthenticated
+        {
+            get
+            {
+                return Session["user"] != null;
             }
         }
 
@@ -48,10 +41,12 @@ namespace Capstone.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetNavbar()
         {
-            User model = CurrentUser;
+            User model = (User)Session["user"];
 
             return PartialView("_Navbar", model);
         }
+
+
 
     }
 }

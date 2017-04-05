@@ -14,7 +14,7 @@ namespace Capstone.Web.Filter
         {
 
             // Check to see if we have a username in the url
-            if (filterContext.ActionParameters.ContainsKey("username"))
+            if (filterContext.ActionParameters.ContainsKey("user"))
             {
 
                 //gets the username from the url

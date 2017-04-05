@@ -1,9 +1,17 @@
-﻿.field-validation-error {
+﻿body{
+    height:100%;
+}
+
+.field-validation-error {
     color: red;
     text-align: center;
 }
 
 #map {
-    height: 400px;
+    height: 500px;
     width: 100%;
+}
+
+nav.navbar.navbar-default{
+    margin-bottom: 0px;
 }

@@ -12,7 +12,7 @@ namespace Capstone.Web.Controllers
     {
         private IUserDAL userDAL;
 
-        public UserController(IUserDAL userDAL) : base(userDAL)
+        public UserController(IUserDAL userDAL)
         {
             this.userDAL = userDAL;
         }
@@ -28,7 +28,7 @@ namespace Capstone.Web.Controllers
         {
             if (base.IsAuthenticated)
             {
-                return RedirectToAction("Home", "Index", new { username = base.CurrentUser });
+                return RedirectToAction("Home", "Index");
             }
             else
             {
@@ -60,7 +60,7 @@ namespace Capstone.Web.Controllers
         [Route("user/login")]
         public ActionResult Login()
         {
-            if (Session["userId"] != null)//if user is already logged in, this won't allow to them to log in again
+            if (Session["user"] != null)//if user is already logged in, this won't allow to them to log in again
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -78,15 +78,18 @@ namespace Capstone.Web.Controllers
                 return View("Login", loginModel);
             }
 
-            int loggedInUser = userDAL.LogInUser(loginModel);
+            int loggedInUserId = userDAL.LogInUser(loginModel);
 
-            if(loggedInUser == -1)//loggedInUser = -1 if email or password is not valid
+            if(loggedInUserId == -1)//loggedInUser = -1 if email or password is not valid
             {
                 ModelState.AddModelError("invalid-login", "The email or password combination is not valid");
                 return View("Login", loginModel);
             }
 
-            Session["userId"] = loggedInUser;
+            User loggedInUser = userDAL.GetUser(loggedInUserId);
+
+            Session["userId"] = loggedInUserId;
+            Session["user"] = loggedInUser;
 
             return RedirectToAction("Index", "Home");
         }
