@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Critter.Web.Extensions
+namespace Capstone.Web.Extensions
 {
     public static class HtmlHelperExtensions
     {
