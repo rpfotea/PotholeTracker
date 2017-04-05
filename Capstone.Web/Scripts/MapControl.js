@@ -5,9 +5,9 @@
             zoom: 13,
             center: cleveland
         });
-        var marker = new google.maps.Marker({
-            position: cleveland,
-            map: map
-        });
+        //var marker = new google.maps.Marker({
+        //    position: cleveland,
+        //    map: map
+        //});
 
 });

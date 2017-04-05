@@ -16,3 +16,7 @@ nav.navbar.navbar-default{
     margin-bottom: 0px;
     border-top:0px;
 }
+
+.navbar-brand{
+    font-weight:600;
+}

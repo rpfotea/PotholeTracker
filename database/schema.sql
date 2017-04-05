@@ -4,6 +4,9 @@
 
 BEGIN TRANSACTION;
 
+DROP TABLE pothole;
+DROP TABLE appUser;
+
 create table appUser(
 
 	userId			int identity(1,1),
@@ -26,7 +29,8 @@ create table pothole(
 	picture			varchar(256),
 	reportDate		dateTime,
 	inspectDate		dateTime,
-	repairDate		dateTime,
+	repairStartDate	dateTime,
+	repairEndDate	dateTime,
 	severity		int,
 	comment			varchar(256),
 

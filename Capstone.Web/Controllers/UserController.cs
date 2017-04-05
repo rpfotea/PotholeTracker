@@ -19,7 +19,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -28,7 +28,7 @@ namespace Capstone.Web.Controllers
         {
             if (base.IsAuthenticated)
             {
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
