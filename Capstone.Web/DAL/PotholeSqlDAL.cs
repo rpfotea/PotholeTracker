@@ -50,7 +50,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE repairEndDate > GETDATE()- 180;", conn);
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE repairEndDate > GETDATE()- 180 OR repairEndDate IS NULL;", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -86,11 +86,7 @@ namespace Capstone.Web.DAL
 
                         potholeList.Add(ph);
                     }
-
-
-                    {
-                        return potholeList;
-                    }
+                    return potholeList;
                 }
             }
             catch (SqlException ex)
