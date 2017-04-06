@@ -33,10 +33,11 @@ namespace Capstone.Web.Controllers
             }
         }
 
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
             return RedirectToAction("Index", "Home");
         }
+        */
 
         [ChildActionOnly]
         public ActionResult GetNavbar()

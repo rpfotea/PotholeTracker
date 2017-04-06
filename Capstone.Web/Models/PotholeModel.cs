@@ -14,9 +14,9 @@ namespace Capstone.Web.Models
         public int WhoInspected { get; set; }
         public string Picture { get; set; }
         public DateTime ReportDate { get; set; }
-        public DateTime InspectDate { get; set; }
-        public DateTime RepairStartDate { get; set; }
-        public DateTime RepairEndDate { get; set; }
+        public DateTime? InspectDate { get; set; }
+        public DateTime? RepairStartDate { get; set; }
+        public DateTime? RepairEndDate { get; set; }
         public int Severity { get; set; }
         public string Comment { get; set; }
     }
