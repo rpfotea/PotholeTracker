@@ -25,7 +25,7 @@ namespace Capstone.Web.DAL
                     addPothole.Parameters.AddWithValue("@latitude", newPothole.Latitude);
                     addPothole.Parameters.AddWithValue("@whoReported", newPothole.WhoReported);
                     addPothole.Parameters.AddWithValue("@reportDate", newPothole.ReportDate);
-          
+
 
                     int result = addPothole.ExecuteNonQuery();
 
@@ -128,7 +128,7 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
-                        
+
                         int potholeID = Convert.ToInt32(reader["potholeID"]);
                         double longitude = Convert.ToDouble(reader["longitude"]);
                         double latitude = Convert.ToDouble(reader["latitude"]);
@@ -154,7 +154,7 @@ namespace Capstone.Web.DAL
                         pothole.RepairEndDate = repairEndDate;
                         pothole.Severity = severity;
                         pothole.Comment = comment;
-                      
+
                     }
                     return pothole;
                 }
@@ -165,7 +165,40 @@ namespace Capstone.Web.DAL
             }
         }
 
+     
+        bool UpdatePothole(PotholeModel existingPothole, int whoInspected)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand updatePothole = new SqlCommand($"UPDATE pothole SET whoInspected = @whoInspected, inspectDate = @inspectDate, repairStartDate = @repairStartDate, repairEndDate = @repairEndDate, severity = @severity, comment = @comment WHERE potholeID = @potholeID;", conn);
 
+                    updatePothole.Parameters.AddWithValue("@whoInspected", whoInspected);
+                    updatePothole.Parameters.AddWithValue("@inspectDate", existingPothole.InspectDate);
+                    updatePothole.Parameters.AddWithValue("@repairStartDate", existingPothole.RepairStartDate);
+                    updatePothole.Parameters.AddWithValue("@repairEndDate", existingPothole.RepairEndDate);
+                    updatePothole.Parameters.AddWithValue("@severity", existingPothole.Severity);
+                    updatePothole.Parameters.AddWithValue("@comment", existingPothole.Comment);
+                    updatePothole.Parameters.AddWithValue("@potholeID", existingPothole.PotholeID);
+                    
+                    int result = updatePothole.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
 
     }
 }
+
+

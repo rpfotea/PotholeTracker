@@ -115,20 +115,4 @@ INSERT INTO pothole (latitude, longitude, whoReported, whoInspected, picture, re
 VALUES				(41.50026, -81.65726,		3,			5,			NULL,	'2017-02-07', '2017-03-07',	'2017-03-15',	'2017-04-01',		3,	NULL);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 COMMIT TRANSACTION;
