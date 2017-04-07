@@ -95,7 +95,58 @@ namespace Capstone.Web.DAL
             }
         }
 
+        public PotholeModel GetOnePothole(string id)
+        {
+            PotholeModel pothole = new PotholeModel();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE potholeId=@pothId", conn);
+                    cmd.Parameters.AddWithValue("@pothId", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        
+                        int potholeID = Convert.ToInt32(reader["potholeID"]);
+                        double longitude = Convert.ToDouble(reader["longitude"]);
+                        double latitude = Convert.ToDouble(reader["latitude"]);
+                        int whoReported = Convert.ToInt32(reader["whoReported"]);
+                        int whoInspected = Convert.ToInt32(reader["whoInspected"]);
+                        string picture = Convert.ToString(reader["picture"]);
+                        DateTime reportDate = Convert.ToDateTime(reader["reportDate"]);
+                        DateTime inspectDate = Convert.ToDateTime(reader["inspectDate"]);
+                        DateTime repairStartDate = Convert.ToDateTime(reader["repairStartDate"]);
+                        DateTime repairEndDate = Convert.ToDateTime(reader["repairEndDate"]);
+                        int severity = Convert.ToInt32(reader["severity"]);
+                        string comment = Convert.ToString(reader["comment"]);
+
+                        pothole.PotholeID = potholeID;
+                        pothole.Longitude = longitude;
+                        pothole.Latitude = latitude;
+                        pothole.WhoReported = whoReported;
+                        pothole.WhoInspected = whoInspected;
+                        pothole.Picture = picture;
+                        pothole.ReportDate = reportDate;
+                        pothole.InspectDate = inspectDate;
+                        pothole.RepairStartDate = repairStartDate;
+                        pothole.RepairEndDate = repairEndDate;
+                        pothole.Severity = severity;
+                        pothole.Comment = comment;
+                      
+                    }
+                    return pothole;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
 
 
 

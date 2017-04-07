@@ -11,6 +11,7 @@ namespace Capstone.Web.DAL
     {
         bool ReportPothole(PotholeModel newPothole);
         List<PotholeModel> GetAllPotholes();
-
+        PotholeModel GetOnePothole(string id);
+        //PotholeModel UpdateOnePothole(string id);
     }
 }
