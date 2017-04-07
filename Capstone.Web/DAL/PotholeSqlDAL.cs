@@ -76,13 +76,13 @@ namespace Capstone.Web.DAL
                         DateTime? repairStartDate = null;
                         if (reader["repairStartDate"] != DBNull.Value)
                         {
-                            inspectDate = Convert.ToDateTime(reader["repairStartDate"]);
+                            repairStartDate = Convert.ToDateTime(reader["repairStartDate"]);
                         }
 
                         DateTime? repairEndDate = null;
                         if (reader["repairEndDate"] != DBNull.Value)
                         {
-                            inspectDate = Convert.ToDateTime(reader["repairEndDate"]);
+                            repairEndDate = Convert.ToDateTime(reader["repairEndDate"]);
                         }
 
                         int severity = (reader["severity"] != DBNull.Value) ? Convert.ToInt32(reader["severity"]) : -1;

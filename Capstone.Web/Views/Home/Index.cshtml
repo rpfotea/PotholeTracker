@@ -11,7 +11,12 @@
 
 <script>
     $(document).ready(function () {
-        placePotholes(@Html.Raw(Json.Encode(Model.ToArray())))
+        if(@((User)HttpContext.Current.Session["user"]) != null){
+        placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), @(((User)HttpContext.Current.Session["user"]).UserType))
+        }
+        else{
+            placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), "")
+        }
     })
 </script>
 
