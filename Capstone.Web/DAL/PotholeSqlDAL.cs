@@ -198,6 +198,44 @@ namespace Capstone.Web.DAL
             return false;
         }
 
+        public List<PotholeModel> GetPotholesUninspected()
+        {
+            List<PotholeModel> potholeListUninspected = new List<PotholeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE inspectDate IS NULL;", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        PotholeModel ph = new PotholeModel();
+
+                        int potholeID = Convert.ToInt32(reader["potholeID"]);
+                        double longitude = Convert.ToDouble(reader["longitude"]);
+                        double latitude = Convert.ToDouble(reader["latitude"]);
+                        int whoReported = Convert.ToInt32(reader["whoReported"]);
+                        
+                        ph.PotholeID = potholeID;
+                        ph.Longitude = longitude;
+                        ph.Latitude = latitude;
+                        ph.WhoReported = whoReported;
+
+                        potholeListUninspected.Add(ph);
+                    }
+                    return potholeListUninspected;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
     }
 }
 
