@@ -20,3 +20,7 @@ nav.navbar.navbar-default{
 .navbar-brand{
     font-weight:600;
 }
+
+.employeeMap{
+    width:70% !important;
+}

@@ -1,13 +1,12 @@
-﻿<script>$(function () { $("#myNavbar").find("[href='/home/index']").parent().addClass("active"); })</script>
+﻿<script>$(function () { $("#myNavbar").find("[href='/function/review']").parent().addClass("active"); })</script>
 <script src="~/Scripts/MapViewControl.js"></script>
 @using Capstone.Web.Models
 @model List<PotholeModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee Portal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <script>
     $(document).ready(function () {
@@ -15,4 +14,4 @@
     })
 </script>
 
-<div id="map" class="employeeMap"></div>
+<div id="map"></div>

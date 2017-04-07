@@ -47,5 +47,18 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public ActionResult Review()
+        {
+            if(((User)Session["user"]) == null || ((User)Session["user"]).UserType.ToLower() != "e")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            List<PotholeModel> model = potholeDAL.GetAllPotholes();
+
+            return View("Review", model);
+        }
+
     }
 }

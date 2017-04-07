@@ -37,22 +37,28 @@ function placePotholes(currentPotholes, userType) {
             }),
             info: currentPotholes[i],
             id:currentPotholes[i].PotholeId,
-            detailWindow: new google.maps.InfoWindow({
-                content: '<p>Hello</p>'
-            }),
 
         }
 
-        google.maps.event.addListener(pothole.pin, 'click', function (event) {
+        pothole.pin.addListener('click', function (event) {
+
+            closeAllInfoWindows();
 
             var infoWindow = new google.maps.InfoWindow({
-                content: '<p>Hello</p>'
+                content: '<p>'+ this.title +'</p>'
             })
 
-            infoWindow.open(map, pothole.pin);
+            infoWindow.open(map, this);
+            infoWindowList.push(infoWindow);
         })
-        potholeList.push(pothole);
-           
+
+        potholeList.push(pothole);  
     }
 
+}
+
+function closeAllInfoWindows() {
+    for (var i = 0; i < infoWindowList.length; i++) {
+        infoWindowList[i].close();
+    }
 }
