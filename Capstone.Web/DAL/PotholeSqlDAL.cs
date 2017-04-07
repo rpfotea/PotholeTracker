@@ -25,6 +25,7 @@ namespace Capstone.Web.DAL
                     addPothole.Parameters.AddWithValue("@latitude", newPothole.Latitude);
                     addPothole.Parameters.AddWithValue("@whoReported", newPothole.WhoReported);
                     addPothole.Parameters.AddWithValue("@reportDate", newPothole.ReportDate);
+          
 
                     int result = addPothole.ExecuteNonQuery();
 
@@ -62,13 +63,29 @@ namespace Capstone.Web.DAL
                         double longitude = Convert.ToDouble(reader["longitude"]);
                         double latitude = Convert.ToDouble(reader["latitude"]);
                         int whoReported = Convert.ToInt32(reader["whoReported"]);
-                        int whoInspected = Convert.ToInt32(reader["whoInspected"]);
+                        int whoInspected = (reader["whoInspected"] != DBNull.Value) ? Convert.ToInt32(reader["whoInspected"]) : -1;
                         string picture = Convert.ToString(reader["picture"]);
                         DateTime reportDate = Convert.ToDateTime(reader["reportDate"]);
-                        DateTime inspectDate = Convert.ToDateTime(reader["inspectDate"]);
-                        DateTime repairStartDate = Convert.ToDateTime(reader["repairStartDate"]);
-                        DateTime repairEndDate = Convert.ToDateTime(reader["repairEndDate"]);
-                        int severity = Convert.ToInt32(reader["severity"]);
+
+                        DateTime? inspectDate = null;
+                        if (reader["inspectDate"] != DBNull.Value)
+                        {
+                            inspectDate = Convert.ToDateTime(reader["inspectDate"]);
+                        }
+
+                        DateTime? repairStartDate = null;
+                        if (reader["repairStartDate"] != DBNull.Value)
+                        {
+                            inspectDate = Convert.ToDateTime(reader["repairStartDate"]);
+                        }
+
+                        DateTime? repairEndDate = null;
+                        if (reader["repairEndDate"] != DBNull.Value)
+                        {
+                            inspectDate = Convert.ToDateTime(reader["repairEndDate"]);
+                        }
+
+                        int severity = (reader["severity"] != DBNull.Value) ? Convert.ToInt32(reader["severity"]) : -1;
                         string comment = Convert.ToString(reader["comment"]);
 
                         ph.PotholeID = potholeID;
