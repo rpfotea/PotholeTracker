@@ -1,5 +1,6 @@
 ﻿var potholeList = [];
 var map;
+var infoWindowList = [];
 
 function placePotholes(currentPotholes, userType) {
 
@@ -29,15 +30,29 @@ function placePotholes(currentPotholes, userType) {
 
         var pothole = {
             pin: new google.maps.Marker({
-            position: { lat: currentPotholes[i].Latitude, lng: currentPotholes[i].Longitude },
-            map: map,
-            icon: img,
-            title: titleText,
-            info: currentPotholes[i]
-            })
+                position: { lat: currentPotholes[i].Latitude, lng: currentPotholes[i].Longitude },
+                map: map,
+                icon: img,
+                title: titleText,
+            }),
+            info: currentPotholes[i],
+            id:currentPotholes[i].PotholeId,
+            detailWindow: new google.maps.InfoWindow({
+                content: '<p>Hello</p>'
+            }),
+
         }
+
+        google.maps.event.addListener(pothole.pin, 'click', function (event) {
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '<p>Hello</p>'
+            })
+
+            infoWindow.open(map, pothole.pin);
+        })
         potholeList.push(pothole);
+           
     }
 
 }
-

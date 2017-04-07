@@ -11,12 +11,12 @@
 
 <script>
     $(document).ready(function () {
-        if(@((User)HttpContext.Current.Session["user"]) != null){
-        placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), @(((User)HttpContext.Current.Session["user"]).UserType))
-        }
-        else{
-            placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), "")
-        }
+        //if(@(HttpContext.Current.Session["user"]) != null){
+            placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), "");
+        //}
+        //else{
+            //placePotholes(@Html.Raw(Json.Encode(Model.ToArray())), "");
+        //}
     })
 </script>
 
