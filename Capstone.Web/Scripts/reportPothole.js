@@ -44,6 +44,7 @@
             marker = new google.maps.Marker({
                 position: location,
                 map: map,
+                draggable: true,
                 //icon: image
             });
         }
