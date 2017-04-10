@@ -165,8 +165,8 @@ namespace Capstone.Web.DAL
             }
         }
 
-     
-        bool UpdatePothole(PotholeModel existingPothole, int whoInspected)
+
+        public bool UpdatePothole(PotholeModel existingPothole, int whoInspected)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace Capstone.Web.DAL
                     updatePothole.Parameters.AddWithValue("@severity", existingPothole.Severity);
                     updatePothole.Parameters.AddWithValue("@comment", existingPothole.Comment);
                     updatePothole.Parameters.AddWithValue("@potholeID", existingPothole.PotholeID);
-                    
+
                     int result = updatePothole.ExecuteNonQuery();
 
                     if (result > 0)
@@ -219,7 +219,7 @@ namespace Capstone.Web.DAL
                         double longitude = Convert.ToDouble(reader["longitude"]);
                         double latitude = Convert.ToDouble(reader["latitude"]);
                         int whoReported = Convert.ToInt32(reader["whoReported"]);
-                        
+
                         ph.PotholeID = potholeID;
                         ph.Longitude = longitude;
                         ph.Latitude = latitude;

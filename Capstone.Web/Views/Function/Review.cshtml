@@ -1,5 +1,6 @@
 ﻿<script>$(function () { $("#myNavbar").find("[href='/function/review']").parent().addClass("active"); })</script>
-<script src="~/Scripts/MapViewControl.js"></script>
+@*<script src="~/Scripts/MapViewControl.js"></script>*@
+<script src="~/Scripts/reviewPothole.js"></script>
 @using Capstone.Web.Models
 @model List<PotholeModel>
 
@@ -14,4 +15,28 @@
     })
 </script>
 
-<div id="map"></div>
+<div id="reviewPanel" class="col-lg-4">
+    <table class="table">
+        <tbody>
+            @{
+                int count = 0;
+                foreach (PotholeModel ph in Model)
+                {
+                    count++;
+                    string id = "rep" + count.ToString();
+                    <tr>
+                        <td>Reported: @ph.ReportDate.Date.ToShortDateString()</td>
+                        <td id="@id">address</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="col-lg-8">
+    <div id="map"></div>
+</div>
+
+@*https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAPiyVpokXSqtRW8T58W_gFi9YutxN-ZlA*@
