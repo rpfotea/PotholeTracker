@@ -37,7 +37,16 @@ else if (Model.UserType == "e") // A user is logged in
         <ul class="nav navbar-nav">
             <li><a href="/home/index">Home</a></li>
             <li><a href="/function/report">Report Pothole</a></li>
-            <li><a href="/function/review">Employee Portal</a></li>
+            @*<li><a href="/function/review">Employee Portal</a></li>*@
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Employee Portal<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/function/review">All Potholes</a></li>
+                    <li><a>Awaiting Inspection</a></li>
+                    <li><a>Awaiting Repair</a></li>
+                    <li><a>Repair Completed</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-text">Welcome @Model.Name.Split(' ')[0]</li>

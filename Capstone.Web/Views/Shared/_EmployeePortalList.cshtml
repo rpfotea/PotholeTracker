@@ -4,25 +4,26 @@
 }
 @using Capstone.Web.Models
 @model List<PotholeModel>
+<table class="table">
+    <tbody>
+        @{
+            //int count = 0;
+            foreach (PotholeModel ph in Model)
+            {
+                //count++;
+                string phAddr = "phAddr" + ph.PotholeID.ToString();
 
-<tbody>
-    @{
-        //int count = 0;
-        foreach (PotholeModel ph in Model)
-        {
-            //count++;
-            string phAddr = "phAddr" + ph.PotholeID.ToString();
-
-            <tr>
-                <td>
-                    Reported: @ph.ReportDate.Date.ToShortDateString()<br />
-                    Lat: @ph.Latitude <br />
-                    Lon: @ph.Longitude
-                </td>
-                <td id="@phAddr">
-                    <script>fillAddress(@ph.Latitude, @ph.Longitude, @ph.PotholeID)</script>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        Reported: @ph.ReportDate.Date.ToShortDateString()<br />
+                        Lat: @ph.Latitude <br />
+                        Lon: @ph.Longitude
+                    </td>
+                    <td id="@phAddr">
+                        <script>fillAddress(@ph.Latitude, @ph.Longitude, @ph.PotholeID)</script>
+                    </td>
+                </tr>
+            }
         }
-    }
-</tbody>
+    </tbody>
+</table>

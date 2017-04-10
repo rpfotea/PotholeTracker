@@ -16,9 +16,27 @@
 </script>
 
 <div id="reviewPanel" class="col-lg-4">
-    <table class="table">
-        @Html.Action("GetEmployeePortalList", "Function")
-    </table>
+    @*@using (Html.BeginForm("GetEmployeePortalList", "Function", FormMethod.Get))
+        {
+            List<SelectListItem> optionList = new List<SelectListItem>()
+            {
+                ("All","All"),
+            };
+            Html.DropDownList("portalFilter", List<)
+        }*@
+
+
+
+    @Html.Action("GetEmployeePortalList", "Function")
+    @*<form action="/function/getEmployeePortalList">
+        <select name="options" onchange="this.form.submit()">
+            <option value="all">All Potholes</option>
+            <option value="inspect">Awaiting Inspection</option>
+            <option value="startRepair">Awaiting Repair</option>
+            <option value="complete">Repair Complete</option>
+        </select>
+    </form>*@
+
 </div>
 
 
