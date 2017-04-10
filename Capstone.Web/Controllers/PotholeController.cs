@@ -47,7 +47,5 @@ namespace Capstone.Web.Controllers
             return PartialView("_Navbar", model);
         }
 
-
-
     }
 }

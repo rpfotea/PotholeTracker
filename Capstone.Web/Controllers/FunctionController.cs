@@ -60,5 +60,12 @@ namespace Capstone.Web.Controllers
             return View("Review", model);
         }
 
+        public ActionResult GetEmployeePortalList()
+        {
+            List<PotholeModel> model = potholeDAL.GetAllPotholes();
+
+            return PartialView("_EmployeePortalList", model);
+        }
+
     }
 }

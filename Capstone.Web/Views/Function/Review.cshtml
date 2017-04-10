@@ -17,26 +17,7 @@
 
 <div id="reviewPanel" class="col-lg-4">
     <table class="table">
-        <tbody>
-            @{
-                //int count = 0;
-                foreach (PotholeModel ph in Model)
-                {
-                    //count++;
-                    string phAddr = "phAddr" + ph.PotholeID.ToString();
-
-                    <tr>
-                        <td>
-                            Reported: @ph.ReportDate.Date.ToShortDateString()<br />
-                            Lat: @ph.Latitude <br />
-                            Lon: @ph.Longitude
-                        </td>
-                        <td id="@phAddr"><script>fillAddress(@ph.Latitude, @ph.Longitude, @ph.PotholeID)</script>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
+        @Html.Action("GetEmployeePortalList", "Function")
     </table>
 </div>
 
