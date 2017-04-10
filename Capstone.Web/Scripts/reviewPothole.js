@@ -12,25 +12,6 @@ function placePotholes(currentPotholes, userType) {
 
     for (var i = 0; i < currentPotholes.length; i++) {
 
-//        var url2 = "https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAPiyVpokXSqtRW8T58W_gFi9YutxN-ZlA"
-
-//// takes lat long and gives street address
-//        $.ajax({
-//            url: url2,//"https://maps.googleapis.com/maps/api/geocode/json?latlng=" + currentPotholes[i].Latitude + "," + currentPotholes[i].Latitude+"&key=AIzaSyAPiyVpokXSqtRW8T58W_gFi9YutxN-ZlA",
-//            type: "GET",
-//            dataType: "json"
-//        }).done(function (data) {
-//            $("#phAddr" + currentPotholes[i].PotholeId.toString()).html(data.results[0].formatted_address);
-//            console.log(data.results[0].formatted_address);
-//            //var adress = data.results[0].formatted_address;
-//            //alert(adress);
-//            //$("#phAddr" + i).html(data.results.formatted_address);
-//            //alert(data.results.formatted_address);
-//        }).fail(function (xhr, status, error) {
-//            console.log(error);
-//        });
-
-
         var img = '/images/reddot.png';
         var titleText = 'Awaiting Inspection';
 
@@ -55,8 +36,7 @@ function placePotholes(currentPotholes, userType) {
                 title: titleText,
             }),
             info: currentPotholes[i],
-            id: currentPotholes[i].PotholeId,
-
+            id: currentPotholes[i].PotholeId, 
         }
 
         pothole.pin.addListener('click', function (event) {
@@ -64,37 +44,15 @@ function placePotholes(currentPotholes, userType) {
             closeAllInfoWindows();
 
             var infoWindow = new google.maps.InfoWindow({
-                content: '<p>' + this.title + '</p>'
+                content: '<p>' + this.title + '</p>',
             })
+
 
             infoWindow.open(map, this);
             infoWindowList.push(infoWindow);
         })
 
         potholeList.push(pothole);
-
-        //var currentUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + currentPotholes[i].Latitude + "," + currentPotholes[i].Longitude + "&key=AIzaSyAPiyVpokXSqtRW8T58W_gFi9YutxN-ZlA"
-
-        //var latlng = pothole.pin.latlng;
-        //var phId = currentPotholes[i].PotholeID;
-        //console.log("i=" + i);
-        //// takes lat long and gives street address
-        //$.ajax({
-        //    url: currentUrl,
-        //    type: "GET",
-        //    dataType: "json",
-
-        //}).done(function (data) {
-        //    $("#phAddr" + phId).text(data.results[0].formatted_address);
-        //    console.log(data.results[0].formatted_address);
-        //    console.log("#phAddr" + phId);
-        //    //var adress = data.results[0].formatted_address;
-        //    //alert(adress);
-        //    //$("#phAddr" + i).html(data.results.formatted_address);
-        //    //alert(data.results.formatted_address);
-        //}).fail(function (xhr, status, error) {
-        //    console.log(error);
-        //});
 
     }
 
@@ -127,4 +85,19 @@ function fillAddress(lat, lng, id) {
     }).fail(function (xhr, status, error) {
         console.log(error);
     });
+}
+function centerOnPoint(latIn, lngIn, id) {
+    var newCenter = { lat: latIn, lng: lngIn };
+    map.setCenter(newCenter);
+    map.setZoom(18);
+    //var infoWindow = getPotholeWindowById(id);
+    //infoWindow.open();
+}
+
+function getPotholeWindowById(id) {
+    for (var i = 0; i < infoWindowList.length; i++) {
+        if (infoWindowList[i].potholeId == id) {
+            return infoWindowList[i];
+        }
+    }
 }

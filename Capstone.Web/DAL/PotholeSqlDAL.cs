@@ -218,11 +218,43 @@ namespace Capstone.Web.DAL
                         double longitude = Convert.ToDouble(reader["longitude"]);
                         double latitude = Convert.ToDouble(reader["latitude"]);
                         int whoReported = Convert.ToInt32(reader["whoReported"]);
+                        int whoInspected = (reader["whoInspected"] != DBNull.Value) ? Convert.ToInt32(reader["whoInspected"]) : -1;
+                        string picture = Convert.ToString(reader["picture"]);
+                        DateTime reportDate = Convert.ToDateTime(reader["reportDate"]);
+
+                        DateTime? inspectDate = null;
+                        if (reader["inspectDate"] != DBNull.Value)
+                        {
+                            inspectDate = Convert.ToDateTime(reader["inspectDate"]);
+                        }
+
+                        DateTime? repairStartDate = null;
+                        if (reader["repairStartDate"] != DBNull.Value)
+                        {
+                            repairStartDate = Convert.ToDateTime(reader["repairStartDate"]);
+                        }
+
+                        DateTime? repairEndDate = null;
+                        if (reader["repairEndDate"] != DBNull.Value)
+                        {
+                            repairEndDate = Convert.ToDateTime(reader["repairEndDate"]);
+                        }
+
+                        int severity = (reader["severity"] != DBNull.Value) ? Convert.ToInt32(reader["severity"]) : -1;
+                        string comment = Convert.ToString(reader["comment"]);
 
                         ph.PotholeID = potholeID;
                         ph.Longitude = longitude;
                         ph.Latitude = latitude;
                         ph.WhoReported = whoReported;
+                        ph.WhoInspected = whoInspected;
+                        ph.Picture = picture;
+                        ph.ReportDate = reportDate;
+                        ph.InspectDate = inspectDate;
+                        ph.RepairStartDate = repairStartDate;
+                        ph.RepairEndDate = repairEndDate;
+                        ph.Severity = severity;
+                        ph.Comment = comment;
 
                         potholeListUninspected.Add(ph);
                     }
@@ -374,7 +406,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     // !!!!!!!!!!!!
-                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE inspectDate IS NOT NULL AND repairStartDate IS NOT NULL AND repairEndDate IS NOT NULL;", conn);
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE repairEndDate IS NOT NULL AND repairEndDate > GETDATE()- 180;", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

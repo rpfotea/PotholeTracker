@@ -16,14 +16,6 @@
 </script>
 
 <div id="reviewPanel" class="col-lg-4">
-    @*@using (Html.BeginForm("GetEmployeePortalList", "Function", FormMethod.Get))
-        {
-            List<SelectListItem> optionList = new List<SelectListItem>()
-            {
-                ("All","All"),
-            };
-            Html.DropDownList("portalFilter", List<)
-        }*@
 
 
 
@@ -33,10 +25,9 @@
                 //int count = 0;
                 foreach (PotholeModel ph in Model)
                 {
-                    //count++;
                     string phAddr = "phAddr" + ph.PotholeID.ToString();
 
-                    <tr>
+                    <tr onclick='centerOnPoint(@ph.Latitude,@ph.Longitude, @ph.PotholeID)'>
                         <td>
                             Reported: @ph.ReportDate.Date.ToShortDateString()<br />
                             Lat: @ph.Latitude <br />
@@ -58,4 +49,3 @@
     <div id="map"></div>
 </div>
 
-@*https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAPiyVpokXSqtRW8T58W_gFi9YutxN-ZlA*@
