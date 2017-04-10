@@ -8,7 +8,7 @@
 }
 
 #map {
-    height: 500px;
+    height: 620px;
     /*width: 100%;*/
 }
 
@@ -29,5 +29,5 @@ nav.navbar.navbar-default{
     display:inline-block;
     /*overflow-y: scroll;*/
     overflow: auto;
-    height: 500px;
+    height: 620px;
 }
