@@ -41,10 +41,11 @@ else if (Model.UserType == "e") // A user is logged in
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">Employee Portal<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/function/review">All Potholes</a></li>
-                    <li><a>Awaiting Inspection</a></li>
-                    <li><a>Awaiting Repair</a></li>
-                    <li><a>Repair Completed</a></li>
+                    <li><a href='/function/review/?option=all'>All Potholes</a></li>
+                    <li><a href='/function/review/?option=uninspected'>Awaiting Inspection</a></li>
+                    <li><a href='/function/review/?option=inspected'>Awaiting Repair</a></li>
+                    <li><a href='/function/review/?option=inRepair'>Repair in Progress</a></li>
+                    <li><a href='/function/review/?option=complete'>Repair Completed</a></li>
                 </ul>
             </li>
         </ul>

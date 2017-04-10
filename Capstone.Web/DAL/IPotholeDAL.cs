@@ -13,8 +13,10 @@ namespace Capstone.Web.DAL
         List<PotholeModel> GetAllPotholes();
         PotholeModel GetOnePothole(string id);
         bool UpdatePothole(PotholeModel existingPothole, int enployeeId);
-        List<PotholeModel> GetPotholesUninspected();
-        List<PotholeModel> GetInspectedAndUnrepairedPotholes();
+        List<PotholeModel> GetPotholesUninspected();      
+        List<PotholeModel> GetInspectedOnly();
+        List<PotholeModel> GetRepairsInProgress();
+        List<PotholeModel> GetRepairedPotholes();
 
     }
 }

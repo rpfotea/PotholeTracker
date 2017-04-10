@@ -48,7 +48,7 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Review()
+        public ActionResult Review(string option)
         {
             if(((User)Session["user"]) == null || ((User)Session["user"]).UserType.ToLower() != "e")
             {
@@ -56,16 +56,27 @@ namespace Capstone.Web.Controllers
             }
 
             List<PotholeModel> model = potholeDAL.GetAllPotholes();
+            if (option == "uninspected")
+            {
+                model = potholeDAL.GetPotholesUninspected();
+            }
+            else if (option == "inspected")
+            {
+                model = potholeDAL.GetInspectedOnly();
+            }
+            else if (option == "inRepair")
+            {
+                model = potholeDAL.GetRepairsInProgress();
+            }
+            else if (option == "complete")
+            {
+                model = potholeDAL.GetRepairedPotholes();
+            }
 
             return View("Review", model);
         }
 
-        public ActionResult GetEmployeePortalList()
-        {
-            List<PotholeModel> model = potholeDAL.GetAllPotholes();
-
-            return PartialView("_EmployeePortalList", model);
-        }
+        
 
     }
 }
