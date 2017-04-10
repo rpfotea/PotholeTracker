@@ -165,7 +165,6 @@ namespace Capstone.Web.DAL
             }
         }
 
-
         public bool UpdatePothole(PotholeModel existingPothole, int whoInspected)
         {
             try
@@ -228,6 +227,71 @@ namespace Capstone.Web.DAL
                         potholeListUninspected.Add(ph);
                     }
                     return potholeListUninspected;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public List<PotholeModel> GetInspectedAndUnrepairedPotholes()
+        {
+            List<PotholeModel> potholeListInspected = new List<PotholeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand($"SELECT * FROM pothole WHERE inspectDate IS NOT NULL AND repairStartDate IS NULL;", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        PotholeModel ph = new PotholeModel();
+
+                        int potholeID = Convert.ToInt32(reader["potholeID"]);
+                        double longitude = Convert.ToDouble(reader["longitude"]);
+                        double latitude = Convert.ToDouble(reader["latitude"]);
+                        int whoReported = Convert.ToInt32(reader["whoReported"]);
+                        int whoInspected = (reader["whoInspected"] != DBNull.Value) ? Convert.ToInt32(reader["whoInspected"]) : -1;
+                        string picture = Convert.ToString(reader["picture"]);
+                        DateTime reportDate = Convert.ToDateTime(reader["reportDate"]);
+                        DateTime inspectDate = Convert.ToDateTime(reader["inspectDate"]);
+                        
+                        DateTime? repairStartDate = null;
+                        if (reader["repairStartDate"] != DBNull.Value)
+                        {
+                            repairStartDate = Convert.ToDateTime(reader["repairStartDate"]);
+                        }
+
+                        DateTime? repairEndDate = null;
+                        if (reader["repairEndDate"] != DBNull.Value)
+                        {
+                            repairEndDate = Convert.ToDateTime(reader["repairEndDate"]);
+                        }
+
+                        int severity = (reader["severity"] != DBNull.Value) ? Convert.ToInt32(reader["severity"]) : -1;
+                        string comment = Convert.ToString(reader["comment"]);
+
+                        ph.PotholeID = potholeID;
+                        ph.Longitude = longitude;
+                        ph.Latitude = latitude;
+                        ph.WhoReported = whoReported;
+                        ph.WhoInspected = whoInspected;
+                        ph.Picture = picture;
+                        ph.ReportDate = reportDate;
+                        ph.InspectDate = inspectDate;
+                        ph.RepairStartDate = repairStartDate;
+                        ph.RepairEndDate = repairEndDate;
+                        ph.Severity = severity;
+                        ph.Comment = comment;
+
+                        potholeListInspected.Add(ph);
+                    }
+                    return potholeListInspected;
                 }
             }
             catch (SqlException ex)
