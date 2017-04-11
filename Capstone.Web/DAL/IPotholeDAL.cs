@@ -17,6 +17,6 @@ namespace Capstone.Web.DAL
         List<PotholeModel> GetInspectedOnly();
         List<PotholeModel> GetRepairsInProgress();
         List<PotholeModel> GetRepairedPotholes();
-        bool DeletePothole(PotholeModel deletePothole);
+        bool DeletePothole(string id);
     }
 }

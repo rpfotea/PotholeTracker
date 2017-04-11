@@ -176,7 +176,14 @@ namespace Capstone.Web.DAL
 
                     updatePothole.Parameters.AddWithValue("@whoInspected", whoInspected);
                     updatePothole.Parameters.AddWithValue("@inspectDate", existingPothole.InspectDate);
-                    updatePothole.Parameters.AddWithValue("@repairStartDate", existingPothole.RepairStartDate);
+                    if (existingPothole.RepairStartDate == null)
+                    {
+                        updatePothole.Parameters.AddWithValue("@repairStartDate", DBNull.Value);
+                    }
+                    else
+                    {
+                        updatePothole.Parameters.AddWithValue("@repairStartDate", existingPothole.RepairStartDate);
+                    }
                     updatePothole.Parameters.AddWithValue("@repairEndDate", existingPothole.RepairEndDate);
                     updatePothole.Parameters.AddWithValue("@severity", existingPothole.Severity);
                     updatePothole.Parameters.AddWithValue("@comment", existingPothole.Comment);
@@ -462,18 +469,18 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public bool DeletePothole(PotholeModel deletePothole)
+        public bool DeletePothole(string id)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand addPothole = new SqlCommand($"DELETE FROM pothole WHERE potholeId=@potholeId;", conn);
+                    SqlCommand deletePothole = new SqlCommand($"DELETE FROM pothole WHERE potholeId=@potholeId;", conn);
+                        
+                    deletePothole.Parameters.AddWithValue("@potholeId", id);
                     
-                    addPothole.Parameters.AddWithValue("@potholeId", deletePothole.PotholeID);
-                    
-                    int result = addPothole.ExecuteNonQuery();
+                    int result = deletePothole.ExecuteNonQuery();
 
                     if (result > 0)
                     {

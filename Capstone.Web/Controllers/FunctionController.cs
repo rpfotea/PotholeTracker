@@ -76,7 +76,43 @@ namespace Capstone.Web.Controllers
             return View("Review", model);
         }
 
-        
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            potholeDAL.DeletePothole(id);
+
+            return RedirectToAction("Review", "Function");
+        }
+
+        [HttpPost]
+        public ActionResult Update(PotholeModel model)
+        {
+            int employeeId = ((User)Session["user"]).UserId;
+
+            PotholeModel existingPothole = potholeDAL.GetOnePothole(model.PotholeID.ToString());
+
+            if(model.RepairEndDate != null)
+            {
+                existingPothole.RepairEndDate = model.RepairEndDate;
+            }
+            else if(model.RepairStartDate != null)
+            {
+                existingPothole.RepairStartDate = model.RepairStartDate;
+            }
+            else if (model.InspectDate == null)
+            {
+                existingPothole.InspectDate = DateTime.Now;
+            }
+
+            if(model.Severity != 0)
+            {
+                existingPothole.Severity = model.Severity;
+            }
+
+            potholeDAL.UpdatePothole(existingPothole, employeeId);
+
+            return RedirectToAction("Review", "Function");
+        }
 
     }
 }
