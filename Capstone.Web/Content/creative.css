@@ -31,3 +31,18 @@ nav.navbar.navbar-default{
     overflow: auto;
     height: 620px;
 }
+
+.streetAddress1{
+    font-weight:bold;
+}
+#lat1{
+    /*text-align:left !important;*/
+    font-size:x-small;
+    display:inline;
+    /*float:left;*/
+}
+#lon1{
+    /*text-align:left !important;*/
+    font-size:x-small;
+    display:inline;
+}
