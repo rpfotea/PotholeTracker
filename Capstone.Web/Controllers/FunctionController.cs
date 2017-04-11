@@ -77,7 +77,7 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             potholeDAL.DeletePothole(id);
 
@@ -85,8 +85,9 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(int potholeId, string status, int severity, string comment)
+        public ActionResult Update(int potholeId, string status, string severity, string comment)
         {
+
             int employeeId = ((User)Session["user"]).UserId;
 
             //PotholeModel existingPothole = potholeDAL.GetOnePothole(model.PotholeID.ToString());
@@ -95,21 +96,21 @@ namespace Capstone.Web.Controllers
             {
                 potholeDAL.UpdateInspectDate(employeeId, potholeId);
             }
-            //else if(model.RepairStartDate != null)
-            //{
-            //    existingPothole.RepairStartDate = model.RepairStartDate;
-            //}
-            //else if (model.InspectDate == null)
-            //{
-            //    existingPothole.InspectDate = DateTime.Now;
-            //}
+            else if (status == "repairStart")
+            {
+                potholeDAL.UpdateStartRepairDate(potholeId);
+            }
+            else if (status == "repairEnd")
+            {
+                potholeDAL.UpdateEndRepairDate(potholeId);
+            }
 
-            //if (severity != 0)
-            //{
-            //    potholeDAL.up;
-            //}
+            if (severity != null)
+            {
+                int intSeverity = Convert.ToInt32(severity);
 
-            //potholeDAL.UpdatePothole(existingPothole, employeeId);
+                potholeDAL.UpdateSeverity(potholeId, intSeverity);
+            }
 
             return RedirectToAction("Review", "Function");
         }

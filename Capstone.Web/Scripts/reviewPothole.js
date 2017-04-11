@@ -17,19 +17,26 @@ function placePotholes(currentPotholes, userType) {
         //var contentString = '<form action="/function/update" method="post"><select name="severity"><option value="0">Severity</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br /><input name="PotholeID" type="hidden" value="' + currentPotholes[i].PotholeId + '"> <input name="InspectDate" type="hidden" value="' + Date.now() + '"> <button id="inspectButton" type="submit">Mark For Repair</button> </form>';
         var contentString = '<form action="/function/update" method="post"><select name="severity"><option value="0">Severity</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br /><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="inspect"> <button id="inspectButton" type="submit">Mark For Repair</button> </form>';
 
-        contentString = contentString +  '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeId + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
+        contentString = contentString +  '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
 
         if (currentPotholes[i].RepairEndDate != null) {
             img = '/images/greendot.png';
             titleText = 'Repair Complete';
+            contentString = '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
         else if (currentPotholes[i].RepairStartDate != null) {
             img = '/images/bluedot.png'
             titleText = 'Repair In Progress';
+            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairEnd"> <button id="inspectButton" type="submit">Repair Complete</button> </form>';
+
+            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
         else if (currentPotholes[i].InspectDate != null) {
             img = '/images/yellowdot.png';
             titleText = 'Awaiting Repair';
+            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairStart"> <button id="inspectButton" type="submit">Begin Repair</button> </form>';
+
+            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
 
         var pothole = {

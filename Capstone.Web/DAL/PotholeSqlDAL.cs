@@ -469,7 +469,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public bool DeletePothole(string id)
+        public bool DeletePothole(int id)
         {
             try
             {
