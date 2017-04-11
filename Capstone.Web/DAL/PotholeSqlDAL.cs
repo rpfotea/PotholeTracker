@@ -523,6 +523,87 @@ namespace Capstone.Web.DAL
             return false;
         }
 
+        public bool UpdateStartRepairDate(int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand updateStartRepairDate = new SqlCommand($"UPDATE pothole SET repairStartDate = @repairStartDate WHERE potholeId=@potholeId", conn);
+
+                    updateStartRepairDate.Parameters.AddWithValue("@repairStartDate", DateTime.Now);
+                    updateStartRepairDate.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = updateStartRepairDate.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool UpdateEndRepairDate(int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand updateEndRepairDate = new SqlCommand($"UPDATE pothole SET repairEndDate = @repairEndDate WHERE potholeId=@potholeId", conn);
+
+                    updateEndRepairDate.Parameters.AddWithValue("@repairEndDate", DateTime.Now);
+                    updateEndRepairDate.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = updateEndRepairDate.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool UpdateSeverity(int potholeId, int severity)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand updateSeverity = new SqlCommand($"UPDATE pothole SET severity = @severity WHERE potholeId=@potholeId", conn);
+
+                    updateSeverity.Parameters.AddWithValue("@severity", severity);
+                    updateSeverity.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = updateSeverity.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
     }
 }
 
