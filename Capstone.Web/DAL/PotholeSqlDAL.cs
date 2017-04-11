@@ -462,6 +462,32 @@ namespace Capstone.Web.DAL
             }
         }
 
+        public bool DeletePothole(PotholeModel deletePothole)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand addPothole = new SqlCommand($"DELETE FROM pothole WHERE potholeId=@potholeId;", conn);
+                    
+                    addPothole.Parameters.AddWithValue("@potholeId", deletePothole.PotholeID);
+                    
+                    int result = addPothole.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
     }
 }
 
