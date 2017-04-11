@@ -85,31 +85,31 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(PotholeModel model)
+        public ActionResult Update(int potholeId, string status, int severity, string comment)
         {
             int employeeId = ((User)Session["user"]).UserId;
 
-            PotholeModel existingPothole = potholeDAL.GetOnePothole(model.PotholeID.ToString());
+            //PotholeModel existingPothole = potholeDAL.GetOnePothole(model.PotholeID.ToString());
 
-            if(model.RepairEndDate != null)
+            if (status == "inspect")
             {
-                existingPothole.RepairEndDate = model.RepairEndDate;
+                potholeDAL.UpdateInspectDate(employeeId, potholeId);
             }
-            else if(model.RepairStartDate != null)
-            {
-                existingPothole.RepairStartDate = model.RepairStartDate;
-            }
-            else if (model.InspectDate == null)
-            {
-                existingPothole.InspectDate = DateTime.Now;
-            }
+            //else if(model.RepairStartDate != null)
+            //{
+            //    existingPothole.RepairStartDate = model.RepairStartDate;
+            //}
+            //else if (model.InspectDate == null)
+            //{
+            //    existingPothole.InspectDate = DateTime.Now;
+            //}
 
-            if(model.Severity != 0)
-            {
-                existingPothole.Severity = model.Severity;
-            }
+            //if (severity != 0)
+            //{
+            //    potholeDAL.up;
+            //}
 
-            potholeDAL.UpdatePothole(existingPothole, employeeId);
+            //potholeDAL.UpdatePothole(existingPothole, employeeId);
 
             return RedirectToAction("Review", "Function");
         }

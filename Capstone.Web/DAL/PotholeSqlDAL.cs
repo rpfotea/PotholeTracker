@@ -495,6 +495,34 @@ namespace Capstone.Web.DAL
             return false;
         }
 
+        public bool UpdateInspectDate(int employeeId, int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand updateInspectDate = new SqlCommand($"UPDATE pothole SET whoInspected = @whoInspected, inspectDate = @inspectDate WHERE potholeId=@potholeId", conn);
+
+                    updateInspectDate.Parameters.AddWithValue("@whoInspected", employeeId);
+                    updateInspectDate.Parameters.AddWithValue("@inspectDate", DateTime.Now);
+                    updateInspectDate.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = updateInspectDate.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
     }
 }
 
