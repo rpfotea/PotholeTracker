@@ -7,7 +7,8 @@ function placePotholes(currentPotholes, userType) {
     var cleveland = { lat: 41.505, lng: -81.681 };
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        center: cleveland
+        center: cleveland,
+        streetViewControl: false
     });
 
     for (var i = 0; i < currentPotholes.length; i++) {
