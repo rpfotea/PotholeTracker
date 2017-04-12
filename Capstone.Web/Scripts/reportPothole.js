@@ -17,7 +17,7 @@
         }
 
         pothole = placePothole(event.latLng); //places marker at latitude & longitude of click and fills pothole object
-        var contentString = '<form action="/function/report" method="post"> <input name="Latitude" type="hidden" value="' + pothole.pin.position.lat() + '"> <input name="Longitude" type="hidden" value="' + pothole.pin.position.lng() + '"> <button id="potholeButton" type="submit">Submit Pothole</button> </form>';
+        var contentString = '<form action="/function/report" method="post"> <input name="Latitude" type="hidden" value="' + pothole.pin.position.lat() + '"> <input name="Longitude" type="hidden" value="' + pothole.pin.position.lng() + '"> <button class="btn-default btn-xs btn-block" id="potholeButton" type="submit">Submit Pothole</button> </form>';
         //pothole.contentString = contentString;
 
         var infowindow = new google.maps.InfoWindow({

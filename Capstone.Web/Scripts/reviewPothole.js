@@ -16,37 +16,37 @@ function placePotholes(currentPotholes, userType) {
         var img = '/images/reddot.png';
         var titleText = 'Awaiting Inspection';
         //var contentString = '<form action="/function/update" method="post"><select name="severity"><option value="0">Severity</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br /><input name="PotholeID" type="hidden" value="' + currentPotholes[i].PotholeId + '"> <input name="InspectDate" type="hidden" value="' + Date.now() + '"> <button id="inspectButton" type="submit">Mark For Repair</button> </form>';
-        var contentString = '<form action="/function/update" method="post"><select name="severity"><option value="0">Severity</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br /><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="inspect"> <button id="inspectButton" type="submit">Mark For Repair</button> </form>';
+        var contentString = '<form action="/function/update" method="post"><select class="form-control" name="severity"><option value="0">Severity</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br /><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="inspect"> <button class="btn-default btn-xs btn-block" id="inspectButton" type="submit">Mark For Repair</button> </form>';
 
-        contentString = contentString +  '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
+        contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-danger btn-xs btn-block" id="deleteButton" type="submit">Delete Pothole</button> </form>'
 
         if (currentPotholes[i].RepairEndDate != null) {
             img = '/images/greendot.png';
             titleText = 'Repair Complete';
             //undoRepairComplete Button
-            contentString = '<form action="/function/undorepaircomplete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="undoButton" type="submit">Undo Repair Complete</button> </form>'
+            contentString = '<form action="/function/undorepaircomplete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-default btn-xs btn-block" id="undoButton" type="submit">Undo Repair Complete</button> </form>'
 
-            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
+            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-danger btn-xs btn-block" id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
         else if (currentPotholes[i].RepairStartDate != null) {
             img = '/images/bluedot.png'
             titleText = 'Repair In Progress';
-            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairEnd"> <button id="inspectButton" type="submit">Repair Complete</button> </form>';
+            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairEnd"> <button class="btn-default btn-xs btn-block" id="inspectButton" type="submit">Repair Complete</button> </form>';
 
             //undoStartRepair Button
-            contentString = contentString + '<form action="/function/undostartrepair" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="undoButton" type="submit">Undo Repair Started</button> </form>'
+            contentString = contentString + '<form action="/function/undostartrepair" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-default btn-xs btn-block" id="undoButton" type="submit">Undo Repair Started</button> </form>'
 
-            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
+            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-danger btn-xs btn-block" id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
         else if (currentPotholes[i].InspectDate != null && currentPotholes[i].RepairStartDate==null) {
             img = '/images/yellowdot.png';
             titleText = 'Awaiting Repair';
             //Begin Repair Button
-            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairStart"> <button id="inspectButton" type="submit">Begin Repair</button> </form>';
+            contentString = '<form action="/function/update" method="post"><input name="potholeId" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <input name="status" type="hidden" value="repairStart"> <button class="btn-default btn-xs btn-block" id="inspectButton" type="submit">Begin Repair</button> </form>';
             //undoInspect Button
-            contentString = contentString + '<form action="/function/undoinspect" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="undoButton" type="submit">Undo Inspect</button> </form>'
+            contentString = contentString + '<form action="/function/undoinspect" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-default btn-xs btn-block" id="undoButton" type="submit">Undo Inspect</button> </form>'
             //Delete Button
-            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button id="deleteButton" type="submit">Delete Pothole</button> </form>'
+            contentString = contentString + '<form action="/function/delete" method="post"> <input name="id" type="hidden" value="' + currentPotholes[i].PotholeID + '"> <button class="btn-danger btn-xs btn-block" id="deleteButton" type="submit">Delete Pothole</button> </form>'
         }
 
         var pothole = {
