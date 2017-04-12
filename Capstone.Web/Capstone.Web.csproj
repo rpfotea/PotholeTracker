@@ -178,7 +178,6 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Function\Report.cshtml" />
     <Content Include="Views\Function\Review.cshtml" />
-    <Content Include="Views\Shared\_EmployeePortalList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

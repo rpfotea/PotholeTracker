@@ -32,11 +32,24 @@
                             <span id="@phAddr" class="streetAddress1"></span>
                             <script>fillAddress(@ph.Latitude, @ph.Longitude, @ph.PotholeID)</script>
                             <br />
-                            <p id="lat1">(Lat: @ph.Latitude.ToString(), </p>
-                            <p id="lon1">Lng: @ph.Longitude)</p>
+                            <p class="latlng">(Lat: @ph.Latitude.ToString(), </p>
+                            <p class="latlng">Lng: @ph.Longitude)</p><br/>
+                            <p class="dateInfo">Reported: @ph.ReportDate.Date.ToShortDateString()</p>
+                            @if (ph.InspectDate != null)
+                            {
+                                <p class="dateInfo">Inspected: @(((DateTime)ph.InspectDate).Date.ToShortDateString())</p>
+                            }
+                            @if (ph.RepairStartDate != null)
+                            {
+                                <p class="dateInfo">Repair Started: @(((DateTime)ph.RepairStartDate).Date.ToShortDateString())</p>
+                            }
+                            @if (ph.RepairEndDate != null)
+                            {
+                                <p class="dateInfo">Repair Completed : @(((DateTime)ph.RepairEndDate).Date.ToShortDateString())</p>
+                            }
                         </td>
                         <td>
-                            Reported: @ph.ReportDate.Date.ToShortDateString()<br />
+                            <p id="potholeStatus">@ph.GetStatus()</p>
                         </td>
                        
                     </tr>
@@ -51,9 +64,21 @@
             $(this).addClass('active').siblings().removeClass('active');
         });
     </script>
+    <script type="text/javascript">
+        $('p:contains("Repair Complete")').css('color','lawngreen');
+    </script>
+    <script type="text/javascript">
+        $('p:contains("Repair In Progress")').css('color', 'blue');
+    </script>
+    <script type="text/javascript">
+        $('p:contains("Awaiting Repair")').css('color', 'gold');
+    </script>
+    <script type="text/javascript">
+        $('p:contains("Awaiting Inspection")').css('color', 'red');
+    </script>
 
 </div>
-<div class="col-lg-8">
+<div id="mapContainer" class="col-lg-8">
     <div id="map"></div>
 </div>
 

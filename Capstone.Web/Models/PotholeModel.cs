@@ -19,5 +19,27 @@ namespace Capstone.Web.Models
         public DateTime? RepairEndDate { get; set; }
         public int Severity { get; set; }
         public string Comment { get; set; }
+
+
+        public string GetStatus()
+        {
+            if (RepairEndDate != null)
+            {
+                return "Repair Complete";
+            }
+            else if (RepairStartDate != null)
+            {
+                return "Repair In Progress";
+            }
+            else if (InspectDate != null)
+            {
+                return "Awaiting Repair";
+            }
+            else 
+            {
+                return "Awaiting Inspection";
+            }
+
+        }
     }
 }

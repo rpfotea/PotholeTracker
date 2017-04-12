@@ -32,27 +32,45 @@ nav.navbar.navbar-default{
     height: 620px;
 }
 
-.streetAddress1{
-    font-weight:bold;
+.streetAddress1 {
+    font-weight: bold;
+    color: #4582ec;
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#lat1{
-    /*text-align:left !important;*/
-    font-size:x-small;
-    display:inline;
-    /*float:left;*/
-}
-#lon1{
-    /*text-align:left !important;*/
-    font-size:x-small;
-    display:inline;
+.latlng {
+    font-size: x-small;
+    display: inline;
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.form-control{
+.form-control {
     padding: 6px !important;
-    font-size:12px !important;
+    font-size: 12px !important;
     height: 30px !important;
+    margin-bottom: 10px !important;
 }
 
 .btn-xs{
     font-size: 12px !important;
+}
+
+.btn-default{
+    margin-bottom:10px !important;
+}
+
+#mapContainer{
+    margin-left:0px !important;
+    padding-left:0px;
+}
+
+#potholeStatus {
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 50%;
+    text-align: center;
+}
+
+.dateInfo {
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: small;
+    font-weight:bold;
 }
