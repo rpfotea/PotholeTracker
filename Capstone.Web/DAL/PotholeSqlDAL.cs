@@ -604,6 +604,89 @@ namespace Capstone.Web.DAL
             return false;
         }
 
+        public bool UndoInspect(int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand UndoInspect = new SqlCommand($"UPDATE pothole SET whoInspected = @whoInspected, inspectDate = @inspectDate, severity=@severity WHERE potholeId=@potholeId", conn);
+
+                    UndoInspect.Parameters.AddWithValue("@whoInspected", DBNull.Value);
+                    UndoInspect.Parameters.AddWithValue("@inspectDate", DBNull.Value);
+                    UndoInspect.Parameters.AddWithValue("@severity", DBNull.Value);
+                    UndoInspect.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = UndoInspect.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool UndoStartRepair(int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand UndoStartRepair = new SqlCommand($"UPDATE pothole SET repairStartDate = @repairStartDate WHERE potholeId=@potholeId", conn);
+
+                    UndoStartRepair.Parameters.AddWithValue("@repairStartDate", DBNull.Value);
+                    UndoStartRepair.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = UndoStartRepair.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool UndoRepairComplete(int potholeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand UndoRepairComplete = new SqlCommand($"UPDATE pothole SET repairEndDate = @repairEndDate WHERE potholeId=@potholeId", conn);
+
+                    UndoRepairComplete.Parameters.AddWithValue("@repairEndDate", DBNull.Value);
+                    UndoRepairComplete.Parameters.AddWithValue("@potholeId", potholeId);
+
+                    int result = UndoRepairComplete.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
     }
 }
 

@@ -22,5 +22,9 @@ namespace Capstone.Web.DAL
         bool UpdateStartRepairDate(int potholeId);
         bool UpdateEndRepairDate(int potholeId);
         bool UpdateSeverity(int potholeId, int severity);
+        bool UndoInspect(int potholeId);
+        bool UndoStartRepair(int potholeId);
+        bool UndoRepairComplete(int potholeId);
+
     }
 }

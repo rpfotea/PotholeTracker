@@ -85,6 +85,32 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult UndoInspect(int id)
+        {
+            potholeDAL.UndoInspect(id);
+
+            return RedirectToAction("Review", "Function");
+        }
+
+        [HttpPost]
+        public ActionResult UndoStartRepair(int id)
+        {
+            potholeDAL.UndoStartRepair(id);
+
+            return RedirectToAction("Review", "Function");
+        }
+
+        [HttpPost]
+        public ActionResult UndoRepairComplete(int id)
+        {
+            potholeDAL.UndoRepairComplete(id);
+
+            return RedirectToAction("Review", "Function");
+        }
+
+
+
+        [HttpPost]
         public ActionResult Update(int potholeId, string status, string severity, string comment)
         {
 
