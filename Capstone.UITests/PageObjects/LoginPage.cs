@@ -39,5 +39,16 @@ namespace Capstone.UITests.PageObjects
 
             return new UserLandingPage(driver);
         }
+
+        public EmployeeLandingPage FillOutFormEmployee(string email, string password)
+        {
+            Email.SendKeys(email.ToString());
+
+            Password.SendKeys(password.ToString());
+
+            LoginButton.Click();
+
+            return new EmployeeLandingPage(driver);
+        }
     }
 }

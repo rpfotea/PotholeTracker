@@ -52,12 +52,12 @@ namespace Capstone.UITests.SeleniumTests
             LoginPage loginPage = new LoginPage(driver);
             loginPage.Navigate();
 
-            EmployeeLandingPage userLandPg = loginPage.FillOutForm("p...", "Techelevator1@");
+            EmployeeLandingPage userLandPg = loginPage.FillOutFormEmployee("cw@te.com", "Techelevator1@");
 
             // delay the assert test
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
 
-            Assert.AreEqual("Report Pothole", userLandPg.ReportPothole.Text);
+            Assert.AreEqual("Employee Portal", userLandPg.EmployeePortal.Text);
 
         }
 
