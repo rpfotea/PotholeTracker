@@ -75,6 +75,8 @@
   <ItemGroup>
     <Compile Include="PageObjects\BasePage.cs" />
     <Compile Include="PageObjects\EmployeeLandingPage.cs" />
+    <Compile Include="PageObjects\RegisterPage.cs" />
+    <Compile Include="PageObjects\RegisterUserExist.cs" />
     <Compile Include="PageObjects\UserLandingPage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
