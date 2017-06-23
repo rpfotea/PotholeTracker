@@ -19,23 +19,20 @@ namespace Capstone.UITests.PageObjects
 
         //Elements on the page
 
-        [FindsBy(How = How.Id, Using = "register_email")]
+        [FindsBy(How = How.Id, Using = "Email")]
         public IWebElement RegisterEmail { get; set; }
 
-        [FindsBy(How = How.Id, Using = "register_password")]
+        [FindsBy(How = How.Id, Using = "Password")]
         public IWebElement RegisterPassword { get; set; }
 
-        [FindsBy(How = How.Id, Using = "register_confirm_password")]
+        [FindsBy(How = How.Id, Using = "ConfirmPassword")]
         public IWebElement RegisterConfirmPassword { get; set; }
 
-        [FindsBy(How = How.Id, Using = "register_name")]
+        [FindsBy(How = How.Id, Using = "Name")]
         public IWebElement RegisterName { get; set; }
 
         [FindsBy(How = How.Id, Using = "register_button")]
         public IWebElement RegisterButton { get; set; }
-
-        [FindsBy(How = How.TagName, Using = "An account with this email address already exists")]
-        public IWebElement EmailAlreadyExist { get; set; }
 
         public RegisterUserExist FillOutRegister(string email, string password, string conf_password, string name)
         {

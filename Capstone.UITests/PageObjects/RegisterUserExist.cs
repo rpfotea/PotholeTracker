@@ -16,7 +16,7 @@ namespace Capstone.UITests.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.TagName, Using = "An account with this email address already exists")]
+        [FindsBy(How = How.ClassName, Using = "field-validation-error")]
         public IWebElement EmailAlreadyExist { get; set; }
                 
     }
